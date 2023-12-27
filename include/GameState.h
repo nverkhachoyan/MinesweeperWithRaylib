@@ -1,6 +1,8 @@
 #ifndef MINESWEEPER_GAMESTATE_H
 #define MINESWEEPER_GAMESTATE_H
 
+#include <stdio.h>
+
 #include "Globals.h"
 #include "Cell.h"
 
@@ -12,6 +14,8 @@ typedef struct GameState
     int numCols;
     int cellWidth;
     int cellHeight;
+    int inputTextSize;
+    char inputText[MAX_INPUT_CHARS];
 } GameState;
 
 enum GameScenes

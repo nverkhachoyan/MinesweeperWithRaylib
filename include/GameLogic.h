@@ -4,9 +4,6 @@
 #include "GameState.h"
 
 void run();
-void drawBoard(GameState **gameState);
-void flagCell(GameState **gameState);
-void drawInputScene(char inputText[], int *textSize);
-void drawGameScene(GameState **gameState);
+void flagSelectedCell(GameState **gameState);
 
 #endif // MINESWEEPER_GAMELOGIC_H

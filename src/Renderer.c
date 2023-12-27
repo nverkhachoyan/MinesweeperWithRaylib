@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 #include "raylib.h"
 
 #include "Renderer.h"
@@ -9,28 +11,100 @@
 void renderGame(GameState **gameState, char inputText[MAX_INPUT_CHARS + 1], int *inputTextSize)
 {
     initBoard(gameState);
-    // Game loop
-    while (!WindowShouldClose())
+
+    // Switch statement for all game scenes/screens
+    while ((*gameState)->currentScene != QUIT_SCENE)
+    {
+
+        switch ((*gameState)->currentScene)
+        {
+        case INPUT_SCENE:
+        {
+            renderScene(inputScene, gameState);
+            break;
+        }
+        case GAME_SCENE:
+        {
+            renderScene(gameScene, gameState);
+            break;
+        }
+        case QUIT_SCENE:
+        {
+            return;
+        }
+        default:
+            break;
+        }
+    }
+}
+
+void renderScene(scenePointer scene, GameState **gameState)
+{
+    int responseFromScene = 0;
+    while (responseFromScene == 0)
     {
         BeginDrawing();
         ClearBackground(RAYWHITE);
 
-        // Switch statement for all game scenes/screens
-        switch ((*gameState)->currentScene)
-        {
-        case INPUT_SCENE:
-            renderInputScene(inputText, inputTextSize);
+        responseFromScene = scene(gameState);
 
-            break;
-        case GAME_SCENE:
-            // renderGameScene(*gameState);
-            break;
-        default:
+        if (WindowShouldClose())
+        {
+            (*gameState)->currentScene = QUIT_SCENE;
             break;
         }
 
         EndDrawing();
     }
+}
+
+int inputScene(GameState **gameState)
+{
+    int posX = SCREEN_WIDTH / 7;
+    int posY = SCREEN_HEIGHT / 3;
+    char *inputText = (*gameState)->inputText;
+    int *inputTextSize = &((*gameState)->inputTextSize);
+
+    int key = GetKeyPressed();
+
+    if (key != 0)
+    {
+        if (isNumeric((char)key) && *inputTextSize < MAX_INPUT_CHARS)
+        {
+            inputText[*inputTextSize] = (char)key;
+            (*inputTextSize)++;
+        }
+        else if (key == KEY_BACKSPACE)
+        {
+            if (*inputTextSize > 0)
+            {
+                (*inputTextSize)--;
+                inputText[*inputTextSize] = '\0';
+            }
+        }
+        else if (key == KEY_SPACE)
+        {
+            (*gameState)->currentScene = GAME_SCENE;
+            return -1;
+        }
+    }
+
+    DrawText("Input Size of Board", posX, posY, 32, BLACK);
+    DrawText(inputText, posX * 2, posY * 2, 32, BLACK);
+
+    return 0;
+}
+
+int gameScene(GameState **gameState)
+{
+    renderBoard(gameState);
+
+    if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT))
+    {
+        renderFlagSelectedCell(gameState);
+    }
+
+    return 0;
 }
 
 void renderBoard(GameState **gameState)
@@ -56,30 +130,16 @@ void renderBoard(GameState **gameState)
     }
 }
 
-void renderInputScene(char inputText[], int *textSize)
+void renderFlagSelectedCell(GameState **gameState)
 {
-    int posX = SCREEN_WIDTH / 7;
-    int posY = SCREEN_HEIGHT / 3;
+    Vector2 mousePos = GetMousePosition();
+    int numRows = (*gameState)->numRows;
+    int numCols = (*gameState)->numCols;
 
-    int key = GetKeyPressed();
+    int xIndex = mousePos.x / (SCREEN_WIDTH / numRows);
+    int yIndex = mousePos.y / (SCREEN_HEIGHT / numCols);
 
-    if (key != 0)
-    {
-        if (isNumeric((char)key) && *textSize < MAX_INPUT_CHARS)
-        {
-            inputText[*textSize] = (char)key;
-            (*textSize)++;
-        }
-        else if (key == KEY_BACKSPACE)
-        {
-            if (*textSize > 0)
-            {
-                (*textSize)--;
-                inputText[*textSize] = '\0';
-            }
-        }
-    }
+    (*gameState)->board[yIndex][xIndex].fillColor = FLAGGED_FILL_COLOR;
 
-    DrawText("Input Size of Board", posX, posY, 32, BLACK);
-    DrawText(inputText, posX * 2, posY * 2, 32, BLACK);
+    printf("POSITION: X = %d, Y = %d\n", xIndex, yIndex);
 }

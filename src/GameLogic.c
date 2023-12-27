@@ -23,26 +23,7 @@ void run()
     Cleanup(&gameState);
 }
 
-void drawGameScene(GameState **gameState)
+void flagSelectedCell(GameState **gameState)
 {
-    renderBoard(gameState);
-
-    if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT))
-    {
-        flagCell(gameState);
-    }
-}
-
-void flagCell(GameState **gameState)
-{
-    Vector2 mousePos = GetMousePosition();
-    int numRows = (*gameState)->numRows;
-    int numCols = (*gameState)->numCols;
-
-    int xIndex = mousePos.x / (SCREEN_WIDTH / numRows);
-    int yIndex = mousePos.y / (SCREEN_HEIGHT / numCols);
-
-    (*gameState)->board[yIndex][xIndex].fillColor = FLAGGED_FILL_COLOR;
-
-    printf("POSITION: X = %d, Y = %d\n", xIndex, yIndex);
+    renderFlagSelectedCell(gameState);
 }
