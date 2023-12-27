@@ -3,6 +3,6 @@
 
 #include "GameState.h"
 
-void Cleanup(GameState **gameState);
+void cleanup(GameState **gameState);
 
 #endif

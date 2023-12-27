@@ -15,15 +15,22 @@ void run()
 {
     char inputText[MAX_INPUT_CHARS + 1] = "\0";
     int textSize = 0;
-
     GameState *gameState = NULL;
 
     renderGame(&gameState, inputText, &textSize);
-
-    Cleanup(&gameState);
+    cleanup(&gameState);
 }
 
-void flagSelectedCell(GameState **gameState)
+void flagCurrentCell(GameState **gameState)
 {
-    renderFlagSelectedCell(gameState);
+    Vector2 mousePos = GetMousePosition();
+    int numRows = (*gameState)->numRows;
+    int numCols = (*gameState)->numCols;
+
+    int xIndex = mousePos.x / (SCREEN_WIDTH / numRows);
+    int yIndex = mousePos.y / (SCREEN_HEIGHT / numCols);
+
+    (*gameState)->board[yIndex][xIndex].fillColor = FLAGGED_FILL_COLOR;
+
+    printf("POSITION: X = %d, Y = %d\n", xIndex, yIndex);
 }

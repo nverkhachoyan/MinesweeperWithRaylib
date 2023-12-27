@@ -2,7 +2,6 @@
 #include <stdlib.h>
 
 #include "raylib.h"
-
 #include "Globals.h"
 #include "Cell.h"
 #include "Init.h"

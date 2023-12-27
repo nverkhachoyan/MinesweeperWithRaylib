@@ -5,10 +5,10 @@
 
 typedef int (*scenePointer)(GameState **gameState);
 
-void renderGame(GameState **gameState, char inputText[MAX_INPUT_CHARS + 1], int *inputTextSize);
+void renderGame(GameState **gameState);
 void renderBoard(GameState **gameState);
-void renderInputScene(GameState **gameState, char inputText[], int *textSize);
-void renderFlagSelectedCell(GameState **gameState);
+
+// Renders scenes (callback functions)
 void renderScene(scenePointer scene, GameState **gameState);
 
 // Scenes

@@ -2,7 +2,7 @@
 
 #include "Cleanup.h"
 
-void Cleanup(GameState **gameState)
+void cleanup(GameState **gameState)
 {
     if (*gameState != NULL)
     {

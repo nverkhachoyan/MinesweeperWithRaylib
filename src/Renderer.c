@@ -1,14 +1,14 @@
 #include <stdio.h>
 
 #include "raylib.h"
-
 #include "Renderer.h"
 #include "Globals.h"
 #include "Init.h"
 #include "GameState.h"
+#include "GameLogic.h"
 #include "Utils.h"
 
-void renderGame(GameState **gameState, char inputText[MAX_INPUT_CHARS + 1], int *inputTextSize)
+void renderGame(GameState **gameState)
 {
     initBoard(gameState);
 
@@ -101,7 +101,7 @@ int gameScene(GameState **gameState)
 
     if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT))
     {
-        renderFlagSelectedCell(gameState);
+        flagCurrentCell(gameState);
     }
 
     return 0;
@@ -128,18 +128,4 @@ void renderBoard(GameState **gameState)
             DrawRectangleLinesEx(rec, 0.6f, lineColor);
         }
     }
-}
-
-void renderFlagSelectedCell(GameState **gameState)
-{
-    Vector2 mousePos = GetMousePosition();
-    int numRows = (*gameState)->numRows;
-    int numCols = (*gameState)->numCols;
-
-    int xIndex = mousePos.x / (SCREEN_WIDTH / numRows);
-    int yIndex = mousePos.y / (SCREEN_HEIGHT / numCols);
-
-    (*gameState)->board[yIndex][xIndex].fillColor = FLAGGED_FILL_COLOR;
-
-    printf("POSITION: X = %d, Y = %d\n", xIndex, yIndex);
 }

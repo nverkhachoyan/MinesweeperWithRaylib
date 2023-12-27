@@ -4,6 +4,6 @@
 #include "GameState.h"
 
 void run();
-void flagSelectedCell(GameState **gameState);
+void flagCurrentCell(GameState **gameState);
 
 #endif // MINESWEEPER_GAMELOGIC_H
