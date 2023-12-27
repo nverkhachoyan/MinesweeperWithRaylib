@@ -4,13 +4,6 @@
 #include "Globals.h"
 #include "Cell.h"
 
-enum GameScenes
-{
-    INPUT_SCENE = 0,
-    GAME_SCENE,
-    QUIT_SCENE
-};
-
 typedef struct GameState
 {
     int currentScene;
@@ -20,5 +13,12 @@ typedef struct GameState
     int cellWidth;
     int cellHeight;
 } GameState;
+
+enum GameScenes
+{
+    INPUT_SCENE = 0,
+    GAME_SCENE,
+    QUIT_SCENE
+};
 
 #endif // MINESWEEPER_GAMESTATE_H
