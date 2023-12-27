@@ -18,6 +18,8 @@ int initBoard(GameState **gameState)
             return EXIT_FAILURE;
         }
 
+        (*gameState)->inputText[0] = '\0';
+        (*gameState)->inputTextSize = 0;
         (*gameState)->numRows = 10;
         (*gameState)->numCols = 10;
         (*gameState)->cellWidth = 40;

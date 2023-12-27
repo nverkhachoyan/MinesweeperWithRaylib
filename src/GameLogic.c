@@ -13,11 +13,9 @@
 
 void run()
 {
-    char inputText[MAX_INPUT_CHARS + 1] = "\0";
-    int textSize = 0;
     GameState *gameState = NULL;
 
-    renderGame(&gameState, inputText, &textSize);
+    renderGame(&gameState);
     cleanup(&gameState);
 }
 
