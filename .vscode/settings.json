@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "*.md": "markdown",
+        "raylib.h": "c",
+        "main.h": "c",
+        "board.h": "c",
+        "cell.h": "c",
+        "globals.h": "c",
+        "gamelogic.h": "c",
+        "stdio.h": "c",
+        "init.h": "c"
+    }
+}

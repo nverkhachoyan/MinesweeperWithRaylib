@@ -1,0 +1,21 @@
+#ifndef MINESWEEPER_GLOBALS_H
+#define MINESWEEPER_GLOBALS_H
+
+#define SCREEN_WIDTH 450
+#define SCREEN_HEIGHT 450
+
+#define MAX_ROWS 50
+#define MAX_COLS 50
+
+#define MAX_INPUT_CHARS 4
+
+// Colors
+#define DEFAULT_FILL_COLOR \
+    BLANK
+#define DEFAULT_LINE_COLOR \
+    CLITERAL(Color) { 200, 200, 200, 255 }
+
+#define FLAGGED_FILL_COLOR \
+    CLITERAL(Color) { 4, 145, 120, 255 }
+
+#endif // MINESWEEPER_GLOBALS_H
