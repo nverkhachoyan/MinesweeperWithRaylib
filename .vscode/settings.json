@@ -8,6 +8,8 @@
         "globals.h": "c",
         "gamelogic.h": "c",
         "stdio.h": "c",
-        "init.h": "c"
+        "init.h": "c",
+        "utils.h": "c",
+        "renderer.h": "c"
     }
 }

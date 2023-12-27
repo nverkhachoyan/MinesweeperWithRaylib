@@ -2,7 +2,10 @@
 
 #include "Cleanup.h"
 
-void Cleanup(Board *board)
+void Cleanup(GameState **gameState)
 {
-    free(board);
+    if (*gameState != NULL)
+    {
+        free(*gameState);
+    }
 }

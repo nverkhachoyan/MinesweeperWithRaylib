@@ -2,11 +2,9 @@
 #include <stdlib.h>
 
 #include "raylib.h"
-
 #include "Globals.h"
 #include "GameLogic.h"
 #include "Cell.h"
-#include "Board.h"
 #include "Init.h"
 #include "Cleanup.h"
 #include "GameState.h"
@@ -17,82 +15,34 @@ void run()
 {
     char inputText[MAX_INPUT_CHARS + 1] = "\0";
     int textSize = 0;
-    Board *board = NULL;
-    GameState gameState = {INPUT_SCENE};
 
-    initBoard(&board);
+    GameState *gameState = NULL;
 
-    while (!WindowShouldClose())
-    {
-        BeginDrawing();
-        ClearBackground(RAYWHITE);
+    renderGame(&gameState, inputText, &textSize);
 
-        switch (gameState.currentScene)
-        {
-        case INPUT_SCENE:
-
-            drawInputScene(inputText, &textSize);
-            break;
-        case GAME_SCENE:
-            drawGameScene(&board);
-        default:
-            break;
-        }
-
-        EndDrawing();
-    }
-
-    Cleanup(board);
+    Cleanup(&gameState);
 }
 
-void drawInputScene(char inputText[], int *textSize)
+void drawGameScene(GameState **gameState)
 {
-    int posX = SCREEN_WIDTH / 7;
-    int posY = SCREEN_HEIGHT / 3;
-
-    int key = GetKeyPressed();
-
-    if (key != 0)
-    {
-        if (isNumeric((char)key) && *textSize < MAX_INPUT_CHARS)
-        {
-            inputText[*textSize] = (char)key;
-            (*textSize)++;
-        }
-        else if (key == KEY_BACKSPACE)
-        {
-            if (*textSize > 0)
-            {
-                (*textSize)--;
-                inputText[*textSize] = '\0';
-            }
-        }
-    }
-
-    DrawText("Input Size of Board", posX, posY, 32, BLACK);
-    DrawText(inputText, posX * 2, posY * 2, 32, BLACK);
-}
-
-void drawGameScene(Board **board)
-{
-    drawBoard(board);
+    renderBoard(gameState);
 
     if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT))
     {
-        rightClick(board);
+        flagCell(gameState);
     }
 }
 
-void rightClick(Board **board)
+void flagCell(GameState **gameState)
 {
     Vector2 mousePos = GetMousePosition();
-    int numRows = (*board)->numRows;
-    int numCols = (*board)->numCols;
+    int numRows = (*gameState)->numRows;
+    int numCols = (*gameState)->numCols;
 
     int xIndex = mousePos.x / (SCREEN_WIDTH / numRows);
     int yIndex = mousePos.y / (SCREEN_HEIGHT / numCols);
 
-    (*board)->board[yIndex][xIndex].fillColor = FLAGGED_FILL_COLOR;
+    (*gameState)->board[yIndex][xIndex].fillColor = FLAGGED_FILL_COLOR;
 
     printf("POSITION: X = %d, Y = %d\n", xIndex, yIndex);
 }

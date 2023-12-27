@@ -1,8 +1,8 @@
 #ifndef MINESWEEPER_CLEANUP_H
 #define MINESWEEPER_CLEANUP_H
 
-#include "Board.h"
+#include "GameState.h"
 
-void Cleanup(Board *board);
+void Cleanup(GameState **gameState);
 
 #endif

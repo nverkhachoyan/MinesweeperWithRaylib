@@ -4,35 +4,36 @@
 #include "raylib.h"
 
 #include "Globals.h"
+#include "Cell.h"
 #include "Init.h"
 
-int initBoard(Board **board)
+int initBoard(GameState **gameState)
 {
-    if (*board == NULL)
+    if (*gameState == NULL)
     {
-        *board = (Board *)malloc(1 * sizeof(Board));
+        *gameState = (GameState *)malloc(sizeof(GameState));
 
-        if (*board == NULL)
+        if (*gameState == NULL)
         {
             fprintf(stderr, "Failed to allocate memory for board.\n");
             return EXIT_FAILURE;
         }
 
-        (*board)->numRows = 10;
-        (*board)->numCols = 10;
-        (*board)->cellWidth = 40;
-        (*board)->cellHeight = 40;
+        (*gameState)->numRows = 10;
+        (*gameState)->numCols = 10;
+        (*gameState)->cellWidth = 40;
+        (*gameState)->cellHeight = 40;
 
-        for (int i = 0; i < (*board)->numRows; i++)
+        for (int i = 0; i < (*gameState)->numRows; i++)
         {
-            for (size_t j = 0; j < (*board)->numCols; j++)
+            for (size_t j = 0; j < (*gameState)->numCols; j++)
             {
                 Cell cell = {
-                    .x = j * (*board)->cellWidth,
-                    .y = i * (*board)->cellHeight,
+                    .x = j * (*gameState)->cellWidth,
+                    .y = i * (*gameState)->cellHeight,
                     DEFAULT_LINE_COLOR,
                     DEFAULT_FILL_COLOR};
-                (*board)->board[i][j] = cell;
+                (*gameState)->board[i][j] = cell;
             }
         }
     }

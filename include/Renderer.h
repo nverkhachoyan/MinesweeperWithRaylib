@@ -1,8 +1,10 @@
 #ifndef MINESWEEPER_RENDERER_H
 #define MINESWEEPER_RENDERER_H
 
-#include "Board.h"
+#include "GameState.h"
 
-void drawBoard(Board **board);
+void renderGame(GameState **gameState, char inputText[MAX_INPUT_CHARS + 1], int *inputTextSize);
+void renderBoard(GameState **gameState);
+void renderInputScene(char inputText[], int *textSize);
 
 #endif // MINESWEEPER_RENDERER_H

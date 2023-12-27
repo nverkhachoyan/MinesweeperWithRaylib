@@ -1,8 +1,8 @@
 #ifndef MINESWEEPER_INIT_H
 #define MINESWEEPER_INIT_H
 
-#include "Board.h"
+#include "GameState.h"
 
-int initBoard(Board **board);
+int initBoard(GameState **gameState);
 
 #endif // MINESWEEPER_INIT_H

@@ -1,12 +1,12 @@
 #ifndef MINESWEEPER_GAMELOGIC_H
 #define MINESWEEPER_GAMELOGIC_H
 
-#include "Board.h"
+#include "GameState.h"
 
 void run();
-void drawBoard(Board **board);
-void rightClick(Board **board);
+void drawBoard(GameState **gameState);
+void flagCell(GameState **gameState);
 void drawInputScene(char inputText[], int *textSize);
-void drawGameScene(Board **board);
+void drawGameScene(GameState **gameState);
 
 #endif // MINESWEEPER_GAMELOGIC_H
