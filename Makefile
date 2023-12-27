@@ -18,19 +18,21 @@ CFLAGS = -Wall -g -I$(IDIR)
 # Libraries to include
 LIBS = -lraylib
 
-# Dependencies (header files)
-_DEPS = main.h Init.h Board.h Cell.h Globals.h Cleanup.h GameLogic.h Utils.h
-DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
+# Automatically generate a list of header files from source files
+HEADERS = $(wildcard $(BASEDIR)/*.h)
 
-# Object files
-_OBJ = main.o Init.o Cleanup.o GameLogic.o Utils.o
+# Automatically generate a list of source files
+SRC = $(wildcard $(BASEDIR)/*.c)
+
+# Generate object file names based on source file names
+_OBJ = $(notdir $(SRC:.c=.o))
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 all: $(PROGRAM_NAME)
 	@./$(PROGRAM_NAME)
 
-# Rule to compile .c files into .o files (regular expressions)
-$(ODIR)/%.o: $(BASEDIR)/%.c $(DEPS)
+# Rule to compile .c files into .o files
+$(ODIR)/%.o: $(BASEDIR)/%.c $(HEADERS)
 	@mkdir -p $(ODIR)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
@@ -46,5 +48,5 @@ run: $(PROGRAM_NAME)
 .PHONY: clean
 
 clean:
-	@rm -f $(ODIR)/*.o *~ core $(INCDIR)/*~ 
+	@rm -f $(ODIR)/*.o *~ core $(INCDIR)/*~
 	@echo "Build clean up complete."
