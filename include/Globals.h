@@ -7,7 +7,7 @@
 #define MAX_ROWS 50
 #define MAX_COLS 50
 
-#define MAX_INPUT_CHARS 4
+#define MAX_INPUT_CHARS 2
 
 // Colors
 #define DEFAULT_FILL_COLOR \
