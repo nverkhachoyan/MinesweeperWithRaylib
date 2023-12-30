@@ -10,6 +10,7 @@
         "stdio.h": "c",
         "init.h": "c",
         "utils.h": "c",
-        "renderer.h": "c"
+        "renderer.h": "c",
+        "gamescene.h": "c"
     }
 }

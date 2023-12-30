@@ -3,13 +3,13 @@
 
 #include "GameState.h"
 
-typedef int (*scenePointer)(GameState **gameState);
+typedef int (*scene_func_ptr)(GameState **gameState);
 
 void renderGame(GameState **gameState);
 void renderBoard(GameState **gameState);
 
 // Renders scenes (callback functions)
-void renderScene(scenePointer scene, GameState **gameState);
+void renderScene(scene_func_ptr scene_func, GameState **gameState);
 
 // Scenes
 int inputScene(GameState **gameState);

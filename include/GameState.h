@@ -14,10 +14,6 @@ typedef struct GameState
     int numCols;
     int cellWidth;
     int cellHeight;
-    char inputRow[MAX_INPUT_CHARS + 1];
-    char inputCol[MAX_INPUT_CHARS + 1];
-    int inputRowSize;
-    int inputColSize;
 } GameState;
 
 enum GameScenes
