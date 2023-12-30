@@ -10,8 +10,8 @@
 #include "Utils.h"
 
 // Scenes
-#include "inputScene.h"
-#include "gameScene.h"
+#include "InputScene.h"
+#include "GameScene.h"
 
 void renderGame(GameState **gameState)
 {

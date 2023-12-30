@@ -1,4 +1,4 @@
-#include "gameScene.h"
+#include "GameScene.h"
 #include "GameLogic.h"
 
 int gameScene(GameState **gameState)

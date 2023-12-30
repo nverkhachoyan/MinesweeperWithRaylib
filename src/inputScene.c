@@ -8,7 +8,7 @@
 #include "GameLogic.h"
 #include "Utils.h"
 
-#include "inputScene.h"
+#include "InputScene.h"
 
 // Stores input for rows and cols
 char inputRow[MAX_INPUT_CHARS + 1] = {'\0'};
