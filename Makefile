@@ -13,10 +13,11 @@ LDIR = lib
 CC = gcc
 
 # Compiler flags: -Wall (show all warnings), -g (debugging), -I (include directory)
-CFLAGS = -Wall -g -I$(IDIR)
+CFLAGS = -Wall -g -I$(IDIR) 
+
 
 # Libraries to include
-LIBS = -lraylib
+LIBS = -L/opt/homebrew/Cellar/raylib/5.0/lib -lraylib
 
 # Automatically generate a list of header files from source files
 HEADERS = $(wildcard $(BASEDIR)/*.h)
@@ -30,6 +31,7 @@ OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 all: $(PROGRAM_NAME)
 	@./$(PROGRAM_NAME)
+
 
 # Rule to compile .c files into .o files
 $(ODIR)/%.o: $(BASEDIR)/%.c $(HEADERS)

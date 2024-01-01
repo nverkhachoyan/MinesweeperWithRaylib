@@ -15,14 +15,14 @@ int gameScene(GameState **gameState)
 
 void renderBoard(GameState **gameState)
 {
-    int numRows = (*gameState)->numRows;
-    int numCols = (*gameState)->numCols;
-    int cellWidth = SCREEN_WIDTH / (*gameState)->numRows;
-    int cellHeight = SCREEN_HEIGHT / (*gameState)->numCols;
+    int user_board_size = (*gameState)->user_board_size;
+    int user_mine_count = (*gameState)->user_mine_count;
+    int cellWidth = SCREEN_WIDTH / MAX_BOARD_SIZE;
+    int cellHeight = SCREEN_HEIGHT / MAX_BOARD_SIZE;
 
-    for (int i = 0; i < numRows; i++)
+    for (int i = 0; i < user_board_size; i++)
     {
-        for (int j = 0; j < numCols; j++)
+        for (int j = 0; j < user_board_size; j++)
         {
             Color lineColor = (*gameState)->board[i][j].lineColor;
             Color fillColor = (*gameState)->board[i][j].fillColor;

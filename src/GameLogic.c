@@ -22,11 +22,10 @@ void run()
 void flagCurrentCell(GameState **gameState)
 {
     Vector2 mousePos = GetMousePosition();
-    int numRows = (*gameState)->numRows;
-    int numCols = (*gameState)->numCols;
+    int board_size = (*gameState)->user_board_size;
 
-    int xIndex = mousePos.x / (SCREEN_WIDTH / numRows);
-    int yIndex = mousePos.y / (SCREEN_HEIGHT / numCols);
+    int xIndex = mousePos.x / (SCREEN_WIDTH / board_size);
+    int yIndex = mousePos.y / (SCREEN_HEIGHT / board_size);
 
     (*gameState)->board[yIndex][xIndex].fillColor = FLAGGED_FILL_COLOR;
 

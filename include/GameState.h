@@ -10,10 +10,10 @@ typedef struct GameState
 {
     int currentScene;
     Cell board[MAX_ROWS][MAX_COLS];
-    int numRows;
-    int numCols;
     int cellWidth;
     int cellHeight;
+    int user_board_size;
+    int user_mine_count;
 } GameState;
 
 enum GameScenes
@@ -21,6 +21,12 @@ enum GameScenes
     INPUT_SCENE = 0,
     GAME_SCENE,
     QUIT_SCENE
+};
+
+enum SCENE_RESPONSE {
+    SCENE_FAIL = -1,
+    SCENE_OK = 0,
+    SCENE_ 
 };
 
 #endif // MINESWEEPER_GAMESTATE_H

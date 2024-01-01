@@ -18,14 +18,13 @@ int initBoard(GameState **gameState)
             return EXIT_FAILURE;
         }
 
-        (*gameState)->numRows = MAX_ROWS;
-        (*gameState)->numCols = MAX_COLS;
         (*gameState)->cellWidth = 40;
         (*gameState)->cellHeight = 40;
 
-        for (int i = 0; i < (*gameState)->numRows; i++)
+        // Using MAX_BOARD_SIZE for both rows and cols to have a square board
+        for (int i = 0; i < MAX_BOARD_SIZE; i++)
         {
-            for (size_t j = 0; j < (*gameState)->numCols; j++)
+            for (size_t j = 0; j < MAX_BOARD_SIZE; j++)
             {
                 Cell cell = {
                     .x = j * (*gameState)->cellWidth,

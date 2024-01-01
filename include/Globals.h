@@ -6,8 +6,8 @@
 
 #define MAX_ROWS 50
 #define MAX_COLS 50
-
-#define MAX_INPUT_CHARS 2
+#define MAX_BOARD_SIZE 50
+#define MAX_MINE_COUNT 25
 
 // Colors
 #define DEFAULT_FILL_COLOR \
