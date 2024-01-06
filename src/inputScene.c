@@ -21,8 +21,9 @@ char board_size_input[MAX_INPUT_LEN + 1] = {'\0'};
 char mine_count_input[MAX_INPUT_LEN + 1] = {'\0'};
 int board_size_input_len = 0;
 int mine_count_input_len = 0;
+bool failValidation = false;
 
-int inputScene(GameState **gameState)
+void inputScene(GameState **gameState)
 {
     // Get a key press
     int key = GetKeyPressed();
@@ -40,13 +41,14 @@ int inputScene(GameState **gameState)
         }
         else if (key == KEY_ENTER || key == KEY_KP_ENTER)
         {
-            handle_enter_input(gameState, board_size_input, mine_count_input, key);
+            if (handle_enter_input(gameState, board_size_input, mine_count_input, key) == 0)
+            {
+                return;
+            }
         }
     }
 
     draw_UI();
-
-    return 0;
 }
 
 void handle_numeric_input(int key)
@@ -81,7 +83,7 @@ void handle_backspace_input(int key)
 
 int handle_enter_input(GameState **game_state, char *board_input, char *mine_input, int key)
 {
-    if (validate_input(board_input, mine_input))
+    if (validate_input(board_input, mine_input) == 0)
     {
         (*game_state)->user_board_size = atoi(board_size_input);
         (*game_state)->user_mine_count = atoi(mine_count_input);
@@ -89,27 +91,52 @@ int handle_enter_input(GameState **game_state, char *board_input, char *mine_inp
         return 0;
     }
 
-    DrawText("Row and column must be less than 50!", posX * 0.5, posY * 2.3, 20, RED);
     return -1;
 }
 
 int validate_input(char *board_size, char *mine_count)
 {
-    if (atoi(board_size_input) >= 50 || atoi(mine_count_input) >= 25)
+    if (atoi(board_size_input) <= 50 || atoi(mine_count_input) <= 25)
     {
-        return -1;
+        return 0;
     }
-    return 0;
+
+    failValidation = true;
+    return -1;
 }
 
 void draw_UI()
 {
     // Ask for input, print inputs
-    DrawText("Input Size of Board", posX, posY, 32, BLACK);
+    DrawText("Input Size of Board", posX, posY * 0.7, 32, BLACK);
+    DrawText("Then Press \"Enter\"", posX * 2.2, posY, 16, BLACK);
 
-    DrawText("Board Size", posX * 2, posY * 1.5, 32, PURPLE);
-    DrawText(board_size_input, posX * 2.2, posY * 1.7, 32, BLACK);
+    // Ask and draw board size
+    DrawText("Board Size",
+             posX * 2.3,
+             posY * 1.5,
+             32,
+             PURPLE);
+    DrawText(board_size_input,
+             posX * 3.1,
+             posY * 1.75,
+             32,
+             BLACK);
 
-    DrawText("# Mines", posX * 4, posY * 1.5, 32, PURPLE);
-    DrawText(mine_count_input, posX * 4.2, posY * 1.7, 32, BLACK);
+    // Ask and draw number of mines
+    DrawText("# Mines",
+             posX * 2.3,
+             posY * 2.0,
+             32,
+             PURPLE);
+    DrawText(mine_count_input,
+             posX * 3.1,
+             posY * 2.2,
+             32,
+             BLACK);
+
+    if (failValidation)
+    {
+        DrawText("Row and column must be less than 50!", posX * 0.5, posY * 2.5, 20, RED);
+    }
 }

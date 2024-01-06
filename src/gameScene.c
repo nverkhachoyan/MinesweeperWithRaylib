@@ -17,8 +17,8 @@ void renderBoard(GameState **gameState)
 {
     int user_board_size = (*gameState)->user_board_size;
     int user_mine_count = (*gameState)->user_mine_count;
-    int cellWidth = SCREEN_WIDTH / MAX_BOARD_SIZE;
-    int cellHeight = SCREEN_HEIGHT / MAX_BOARD_SIZE;
+    int cellWidth = SCREEN_WIDTH / user_board_size;
+    int cellHeight = SCREEN_HEIGHT / user_board_size;
 
     for (int i = 0; i < user_board_size; i++)
     {

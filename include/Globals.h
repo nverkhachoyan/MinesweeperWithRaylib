@@ -1,3 +1,5 @@
+#include <raylib.h>
+
 #ifndef MINESWEEPER_GLOBALS_H
 #define MINESWEEPER_GLOBALS_H
 

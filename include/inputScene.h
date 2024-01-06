@@ -3,7 +3,7 @@
 
 #include "GameState.h"
 
-int inputScene(GameState **gameState);
+void inputScene(GameState **gameState);
 void handle_numeric_input(int key);
 void handle_backspace_input(int key);
 int handle_enter_input(GameState **game_state, char *board_input, char *mine_input, int key);
