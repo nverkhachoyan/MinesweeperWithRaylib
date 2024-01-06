@@ -5,8 +5,7 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/include",
-                "/opt/homebrew/Cellar/raylib/4.5.0/include",
-                "${workspaceFolder}/src/scenes/*"
+                "/opt/homebrew/Cellar/raylib/5.0/include"
             ],
             "defines": [],
             "macFrameworkPath": [
